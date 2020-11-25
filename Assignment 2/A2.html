@@ -17,8 +17,8 @@
       
       class Vector {
         constructor(x,y) {
-          x = parseInt(x);
-          y = parseInt(y);
+          this.x = parseInt(x);
+          this.y = parseInt(y);
         }
 
         static distance(a,b) {
@@ -73,8 +73,7 @@
           x = randNum(0,windowWidth - myAlien.width);
           y = randNum(0, windowHeight - alien.height);
           newPosition = new Vector(x,y);
-        }
-        while(Vector.distance(currentPosition, newPosition) < windowHeight * 0.5);
+        } while(Vector.distance(currentPosition, newPosition) < windowHeight * 0.5);
 
         event.target.style.left = newPosition.x + 'px';
         event.target.style.top = newPosition.y + 'px';
