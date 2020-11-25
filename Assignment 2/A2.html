@@ -32,6 +32,7 @@
         return Math.random() * (max - min) + min;
       }
 
+      var myAlien, mySpaceship, windowHeight, windowWidth;
       window.addEventListener("load", function(event) {
         console.log("The application has been loaded");
         // Put the height and width of the window in a variable
@@ -62,8 +63,24 @@
            mySpaceship.style.left = parseInt(x) + 'px';
            mySpaceship.style.top = parseInt(y) + 'px';
         });
+        // Event listener for mouseover the alien image.
+        myAlien.addEventListener("mouseover", function(event) {
+            let currentPosition = new Vector(event.target.style.left, event.target.style.top);
+            let newPosition, x, y;
 
-      })
+        // Create a loop until distance (above) meets minimum value specified.
+        do {
+          x = randNum(0,windowWidth - myAlien.width);
+          y = randNum(0, windowHeight - alien.height);
+          newPosition = new Vector(x,y);
+        }
+        while(Vector.distance(currentPosition, newPosition) < windowHeight * 0.5);
+
+        event.target.style.left = newPosition.x + 'px';
+        event.target.style.top = newPosition.y + 'px';
+        });
+
+      });
 
       //2. Create an event handler on the window object for the mousemove event  
 
