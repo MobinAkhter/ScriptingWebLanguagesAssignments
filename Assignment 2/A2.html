@@ -20,7 +20,7 @@
           x = parseInt(x);
           y = parseInt(y);
         }
-        
+
         static distance(a,b) {
           const dx = a.x - b.x;
           const dy = a.y - b.y;
@@ -53,8 +53,15 @@
 
         // EventListener for the mousemove event on the window object
         window.addEventListener("mousemove", function(event) {
-           
-        })
+           let offsetX = randNum(0,50) + 100;
+           let offsetY = randNum(0,50) + 100;
+
+           let x = event.clientX + offsetX;
+           let y = event.clientY + offsetY;
+
+           mySpaceship.style.left = parseInt(x) + 'px';
+           mySpaceship.style.top = parseInt(y) + 'px';
+        });
 
       })
 
