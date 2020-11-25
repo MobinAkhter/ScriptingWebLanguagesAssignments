@@ -14,10 +14,23 @@
     <img src="images/spaceship.png" id="spaceship1" class="spaceship" draggable = "false">
 
     <script>
-      //Solution is 15 lines of code.  The instructions make it look like a longer assingment than it really it is.
+      
+      class Vector {
+        constructor(x,y) {
+          x = parseInt(x);
+          y = parseInt(y);
+        }
+        static distance(a,b) {
+          const dx = a.x - b.x;
+          const dy = a.y - b.y;
+          return parseInt(Math.sqrt(dx*dx + dy*dy));
+        }
+      }
 
-      //Event handler setup
-      //1. Create an event handler on the window object for the load event 
+      function randNum(min,max) {
+        return Math.random() * (max - min) + min;
+      }
+
       window.addEventListener("load", function(event) {
         console.log("The application has been loaded");
         // Put the height and width of the window in a variable
@@ -25,7 +38,23 @@
         windowHeight = document.documentElement.clientHeight;
         windowWidth = document.documentElement.clientWidth;
 
-        
+        // Get the element of the spaceship by ID and assign it to var
+        mySpaceship = document.getElementById("spaceship1");
+
+        // Use the style.left and style.top properties on this variable to have the spaceship be at the middle of the browser's screen, once the app is loaded
+        mySpaceship.style.left = parseInt(windowWidth/2) + 'px'; // Concatenating px to the value
+        mySpaceship.style.top = parseInt(windowHeight/2) + 'px';
+
+        // Make the alien appear at the top left of the screen, so that there is some distance between the two images.
+        myAlien = document.getElementById("alien");
+        myAlien.style.left = 0 + 'px';
+        myAlien.style.top = 0 + 'px';
+
+        // EventListener for the mousemove event on the window object
+        window.addEventListener("mousemove", function(event) {
+           
+        })
+
       })
 
       //2. Create an event handler on the window object for the mousemove event  
