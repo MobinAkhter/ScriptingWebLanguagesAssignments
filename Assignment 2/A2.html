@@ -71,14 +71,13 @@
         // Create a loop until distance (above) meets minimum value specified.
         do {
           x = randNum(0,windowWidth - myAlien.width);
-          y = randNum(0, windowHeight - alien.height);
+          y = randNum(0, windowHeight - myAlien.height);
           newPosition = new Vector(x,y);
         } while(Vector.distance(currentPosition, newPosition) < windowHeight * 0.5);
 
         event.target.style.left = newPosition.x + 'px';
         event.target.style.top = newPosition.y + 'px';
         });
-
       });
     </script>
   </body>
