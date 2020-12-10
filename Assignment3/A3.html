@@ -57,33 +57,32 @@ function initApp(){
     xhr.onreadystatechange = function (evt) { 
          //2. Create variable to store all the rows data for <tbody> & initialize it to an empty string. 
         var rows = h3.textContent;
-        rows.innerHTML = "";
+        rows.textContent = "";
         //If server connection established -> ready state = OPENED
         if (this.readyState == XMLHttpRequest.OPENED) {
             // Steps 3 to 5 - Refer to Ex 9.1 as an example
             //3. Change button text to "Please Wait!" 
             var btnSubmit = document.getElementById("btnSubmit");
-            var btnSubmitText = btnSubmit.innerHTML; 
-            btnSubmit.innerHTML = "Please Wait!";
+            var btnSubmitText = btnSubmit.textContent; 
+            btnSubmit.textContent = "Please Wait!";
             //4. Reset text to an empty string inside <tbody> 
-            rows.innerHTML = "";
+            rows.textContent = "";
             
             //5. Reset header to default text
             
-
         } //If request finished & response ready -> ready state = DONE
         else if (this.readyState == XMLHttpRequest.DONE) {
             //If server returns "200" status code: we got the file
             if (this.status == 200) {
                // Convert JSON into JavaScript object
                data = JSON.parse(this.responseText);
-                   
+               
                // Check data is correct. i.e. data.section exists
                if (data && data.section) {
         
                     if (data.section.title) { //Check title exists
                         //6. Change h3 header text to title from JSON
-                        
+                        h3.textContent = data.section.title;
                     }
 
                     //7. In rows variable, store rows data in table format
