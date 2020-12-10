@@ -73,13 +73,13 @@ function initApp(){
         } //If request finished & response ready -> ready state = DONE
         else if (this.readyState == XMLHttpRequest.DONE) {
             //If server returns "200" status code: we got the file
-            if (this.status == 200) {
+            if (this.status == 200 || this.status <300) { // just in case
                // Convert JSON into JavaScript object
                data = JSON.parse(this.responseText);
                
                // Check data is correct. i.e. data.section exists
                if (data && data.section) {
-                    btnSubmit.textContent = "Re-load Data";
+                    
                     if (data.section.title) { //Check title exists
                         //6. Change h3 header text to title from JSON
                         h3.textContent = data.section.title;
@@ -90,11 +90,18 @@ function initApp(){
                     //Note: Requires concatenating table HTML tags to the JSON data to create each row & cell.
                     // Slow loop: .forEach - do not use
                     // Fastest loop: for(...)
-                    
+                    for (var i = 0; i < data.section.signing.length; i++){
+                        rows += '<tr> <tr>' + data.section.signing[i].author.title +
+                        data.section.signing[i].author.name +'</td>' + '<td>'+
+                        data.section.signing[i].book.title +'</td>' + '<td>' + 
+                        data.section.signing[i].book.price + '</td>' +'</td>';
+                        
+                    }
                } // This ends the "if (data.section)".
                else {
                    //8. (else) If not able to parse data -> show "Error: Incorrect input received from the server!" error message.
-                   // This will display the error below the author, but this will work when JSON is not parsed, which is the idea. Not making it look pretty, and error not shown in the description video of the project either.
+
+                   // This will display the error below the author column, but this will work when JSON is not parsed, which is the idea. Not making it look pretty, and error not shown in the description video of the project either.
                    titleBody.textContent = "Error: Incorrect input received from the server!";
                    titleBody.style.color = "red";
                }
@@ -103,12 +110,13 @@ function initApp(){
             // This is equivalent to both error & timeout events.
             else { 
                 titleBody.textContent = "Error: Cannot connect to the server!";
+                titleBody.style.color = "red";
             }
             //10. Display rows data to the table
-            
+            console.log(rows);
             //11. Change button text to concatenate "Re-" to the existing text to display "Re-Load Data". Similar to Ex 9.1
             // btnSubmit.textContent = "Re-" + btnSubmit.textContent;
-            
+            btnSubmit.textContent = "Re-load Data";
         } // This ends the else if (this.readyState == XMLHttpRequest.DONE) 
     }; // This ends the onreadystatechange event handler
 
