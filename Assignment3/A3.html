@@ -94,6 +94,7 @@ function initApp(){
                } // This ends the "if (data.section)".
                else {
                    //8. (else) If not able to parse data -> show "Error: Incorrect input received from the server!" error message.
+                   // This will display the error below the author, but this will work when JSON is not parsed, which is the idea. Not making it look pretty, and error not shown in the description video of the project either.
                    titleBody.textContent = "Error: Incorrect input received from the server!";
                    titleBody.style.color = "red";
                }
@@ -101,7 +102,7 @@ function initApp(){
             //9. (else) If server returns 404 or 500 or 30X status code: means we didn't get the file. then display error message "Error: Cannot connect to the server!"
             // This is equivalent to both error & timeout events.
             else { 
-                
+                titleBody.textContent = "Error: Cannot connect to the server!";
             }
             //10. Display rows data to the table
             
