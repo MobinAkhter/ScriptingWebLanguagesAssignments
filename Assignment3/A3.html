@@ -42,12 +42,11 @@
 document.addEventListener("DOMContentLoaded", initApp);
 
 function initApp(){
-    var btnSubmit = document.getElementById("btnSubmit");
-    var btnSubmitText = btnSubmit.textContent;
-
+    
     //1. Cache tbody, h3 & h3 text selectors: See Ex 9.1
+    var titleBody = document.querySelector("tbody");
     var h3 = document.querySelector("h3");
-
+    var btnSubmit = document.getElementById("btnSubmit");
     var url = "http://babanski.com/files/ajax/book_signing_event.json";
 
     var data = null;
@@ -56,19 +55,20 @@ function initApp(){
     // Create function triggered by each state change event 
     xhr.onreadystatechange = function (evt) { 
          //2. Create variable to store all the rows data for <tbody> & initialize it to an empty string. 
-        var rows = h3.textContent;
+        var rows = titleBody.rows;
         rows.textContent = "";
         //If server connection established -> ready state = OPENED
         if (this.readyState == XMLHttpRequest.OPENED) {
             // Steps 3 to 5 - Refer to Ex 9.1 as an example
             //3. Change button text to "Please Wait!" 
-            var btnSubmit = document.getElementById("btnSubmit");
+            
+            var btnSubmitText = btnSubmit.textContent;
             var btnSubmitText = btnSubmit.textContent; 
             btnSubmit.textContent = "Please Wait!";
             //4. Reset text to an empty string inside <tbody> 
-            rows.textContent = "";
-            
+            titleBody.textContent = "";
             //5. Reset header to default text
+            
             
         } //If request finished & response ready -> ready state = DONE
         else if (this.readyState == XMLHttpRequest.DONE) {
@@ -79,10 +79,11 @@ function initApp(){
                
                // Check data is correct. i.e. data.section exists
                if (data && data.section) {
-        
+                    btnSubmit.textContent = "Re-load Data";
                     if (data.section.title) { //Check title exists
                         //6. Change h3 header text to title from JSON
                         h3.textContent = data.section.title;
+
                     }
 
                     //7. In rows variable, store rows data in table format
@@ -93,7 +94,8 @@ function initApp(){
                } // This ends the "if (data.section)".
                else {
                    //8. (else) If not able to parse data -> show "Error: Incorrect input received from the server!" error message.
-                   
+                   titleBody.textContent = "Error: Incorrect input received from the server!";
+                   titleBody.style.color = "red";
                }
             } // This ends the "if (this.status == 200)"
             //9. (else) If server returns 404 or 500 or 30X status code: means we didn't get the file. then display error message "Error: Cannot connect to the server!"
@@ -104,6 +106,7 @@ function initApp(){
             //10. Display rows data to the table
             
             //11. Change button text to concatenate "Re-" to the existing text to display "Re-Load Data". Similar to Ex 9.1
+            // btnSubmit.textContent = "Re-" + btnSubmit.textContent;
             
         } // This ends the else if (this.readyState == XMLHttpRequest.DONE) 
     }; // This ends the onreadystatechange event handler
