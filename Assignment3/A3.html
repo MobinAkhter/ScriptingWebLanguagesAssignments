@@ -68,7 +68,7 @@ function initApp(){
             //4. Reset text to an empty string inside <tbody> 
             titleBody.textContent = "";
             //5. Reset header to default text
-            
+            //  h3.textContent = "Book Signing Event";
             
         } //If request finished & response ready -> ready state = DONE
         else if (this.readyState == XMLHttpRequest.DONE) {
@@ -113,7 +113,7 @@ function initApp(){
                 titleBody.style.color = "red";
             }
             //10. Display rows data to the table
-            console.log(rows);
+            titleBody.innerHTML = rows;
             //11. Change button text to concatenate "Re-" to the existing text to display "Re-Load Data". Similar to Ex 9.1
             // btnSubmit.textContent = "Re-" + btnSubmit.textContent;
             btnSubmit.textContent = "Re-load Data";
