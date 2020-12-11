@@ -83,9 +83,7 @@ function initApp(){
                     if (data.section.title) { //Check title exists
                         //6. Change h3 header text to title from JSON
                         h3.textContent = data.section.title;
-
                     }
-
                     //7. In rows variable, store rows data in table format
                     //Note: Requires concatenating table HTML tags to the JSON data to create each row & cell.
                     // Slow loop: .forEach - do not use
@@ -95,8 +93,8 @@ function initApp(){
                         data.section.signing[i].author.name +'</td>' + '<td>'+
                         data.section.signing[i].book.title +'</td>' + '<td>' + 
                         data.section.signing[i].book.price + '</td>' +'</td>';
-                        
                     }
+                    // Could have manually created 2 rows 3 columns and then fill it according to the column and row index. 
                } // This ends the "if (data.section)".
                else {
                    //8. (else) If not able to parse data -> show "Error: Incorrect input received from the server!" error message.
